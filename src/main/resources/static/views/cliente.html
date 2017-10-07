@@ -1,0 +1,57 @@
+<style>
+<!--
+fieldset{
+	display: inline;
+}
+-->
+</style>
+
+<div>
+	
+	<br/>
+<form novalidate name="frmCliente">
+
+	<div>
+	<label>Nome : </label>
+		<input type="text" name="txtNome" data-ng-model="cliente.nome" required />
+		<span data-ng-show="frmCliente.txtNome.$error.required && frmCliente.txtEmail.$dirty">Campo Nome Obrigatorio</span>
+	</div>
+	<div>
+	<label>E-mail:</label>
+		<input type="email" name="txtEmail" data-ng-model="cliente.email" required />
+		<span data-ng-show="frmCliente.txtEmail.$error.required && frmCliente.txtEmail.$dirty">Campo Email Obrigatorio</span>
+	</div>
+	<br></br>
+	<input type="button" value="Salvar" data-ng-click="salvarClientes()" data-ng-disabled="frmCliente.$invalid" />
+	<input type="button" value="Cancelar" data-ng-click="cancelarAlterarCliente()" data-ng-disabled="frmCliente.$invalid"/>
+	
+	<br/>
+	<div>
+	
+	
+		<fieldset>
+		<legend>Formulário</legend>
+			Valid: {{frmCliente.$valid}}		
+		</fieldset>
+		
+		<fieldset>
+			<legend>Nome</legend>
+			//Está Valido???
+			Valid: {{frmCliente.txtNome.$valid}} 
+			Invalid: {{frmCliente.txtNome.$invalid}} //Não está valido???
+			Pristine: {{frmCliente.txtNome.$pristine}} //Já foi usado???
+			Dirty: {{frmCliente.txtNome.$dirty}} // Já foi sujo, usado???
+			Touched: {{frmCliente.txtNome.$touched}} //Se já foi passado por ele
+		</fieldset>
+	</div>
+</form>
+<br/>
+	<div data-ng-repeat="cli in clientes">
+		{{cli.id +" " +cli.nome}} 
+		<input type="button" value="Excluir" data-ng-click="excluirCliente(cli)" /> 
+		<input type="button" value="Alterar" data-ng-click="alterarCliente(cli)" />
+		<a href = "clientes/{{cli.id}}">Detalhe</a>
+
+	</div>
+
+</div>
